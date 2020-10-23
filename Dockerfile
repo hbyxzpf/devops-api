@@ -6,7 +6,7 @@ ENV GO111MODULE=on \
     CGO_ENABLED=0 \
     GOOS=linux \
     GOARCH=amd64 \
-    GOPROXY=https://mirrors.cloud.tencent.com/go/
+    GOPROXY=https://goproxy.cn
 # 移动到工作目录：/build
 WORKDIR /build
 # 将代码复制到容器中
