@@ -15,6 +15,8 @@ var (
 	// QrImageDir 二维码图片目录
 	QrImageDir string
 
+	QrImageHost string
+
 	// Logger 日志对象
 	Logger *hltool.HLogger
 
@@ -41,6 +43,7 @@ func init() {
 	if !hltool.IsExist(QrImageDir) {
 		os.MkdirAll(QrImageDir, os.ModePerm)
 	}
+	QrImageHost = beego.AppConfig.String("twostepauth::qrImageHost")
 }
 
 // getEnableToken 读取是否启用 Token 认证配置
