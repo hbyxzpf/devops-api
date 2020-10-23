@@ -21,8 +21,8 @@ func getUniqueIDName() string {
 
 var (
 	UniQueIDName   = getUniqueIDName()
-	NeedTokenError = "need DEVOPS-API-TOKEN header"
-	TokenAuthError = "DEVOPS-API-TOKEN auth fail"
+	NeedTokenError = "need API-TOKEN header"
+	TokenAuthError = "API-TOKEN auth fail"
 )
 
 type StringMap map[string]interface{}
@@ -114,7 +114,7 @@ func (b *BaseController) Prepare() {
 	if common.EnableToken {
 
 		// 获取 DEVOPS-API-TOKEN 头信息
-		token := b.Ctx.Input.Header("X-API-TOKEN")
+		token := b.Ctx.Input.Header("Api-Token")
 		if token == "" {
 			b.JsonError("JWToken Auth", NeedTokenError, StringMap{}, true)
 			b.StopRun()
