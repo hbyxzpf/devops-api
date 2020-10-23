@@ -7,7 +7,7 @@ import (
 	"path"
 
 	"github.com/chanyipiaomiao/hltool"
-	"github.com/sec51/twofactor"
+	"github.com/hbyxzpf/twofactor"
 )
 
 var (
