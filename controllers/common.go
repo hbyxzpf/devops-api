@@ -114,7 +114,7 @@ func (b *BaseController) Prepare() {
 	if common.EnableToken {
 
 		// 获取 DEVOPS-API-TOKEN 头信息
-		token := b.Ctx.Input.Header("DEVOPS-API-TOKEN")
+		token := b.Ctx.Input.Header("X-API-TOKEN")
 		if token == "" {
 			b.JsonError("JWToken Auth", NeedTokenError, StringMap{}, true)
 			b.StopRun()
