@@ -14,6 +14,6 @@ COPY . .
 RUN  go build -o devops-api .
 WORKDIR /dist
 RUN cp /build/devops-api .
-CMD ./devops-api init
+#CMD ./devops-api init
 #ENTRYPOINT ["./devops-api","init"]
 ENTRYPOINT ["./devops-api","server"]
