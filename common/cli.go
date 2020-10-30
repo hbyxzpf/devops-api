@@ -86,7 +86,6 @@ func InitCli() {
 
 			beego.BConfig.RunMode = *runMode
 		}
-		beego.SetStaticPath("/api/static/download/qr", "static/download/qr")
 		beego.Run()
 
 	case "token":

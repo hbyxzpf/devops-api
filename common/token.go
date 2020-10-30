@@ -7,7 +7,6 @@ import (
 	"github.com/chanyipiaomiao/hltool"
 )
 
-
 const (
 
 	// 存放token的表名
@@ -15,10 +14,9 @@ const (
 )
 
 // Token 结构体
-type Token struct{
-	TokenDb *hltool.BoltDB
+type Token struct {
+	TokenDb    *hltool.BoltDB
 	SignString string
-
 }
 
 // NewToken 返回Token对象
@@ -31,7 +29,7 @@ func NewToken() (*Token, error) {
 	if signString == "" {
 		return nil, fmt.Errorf("warning: in conf file jwtokenSignString must not null")
 	}
-	return &Token{TokenDb:tokenDb, SignString: signString}, nil
+	return &Token{TokenDb: tokenDb, SignString: signString}, nil
 }
 
 // GetToken 根据name获取token
@@ -64,8 +62,7 @@ func (t *Token) IsExistToken(name string) (bool, error) {
 
 // IsTokenValid token是否有效
 func (t *Token) IsTokenValid(token string) (bool, error) {
-	jwt := hltool.NewJWToken(t.SignString)
-	parseToken, err := jwt.ParseJWToken(token)
+	parseToken, err := t.ParseToken(token)
 	if err != nil {
 		return false, err
 	}
@@ -84,10 +81,17 @@ func (t *Token) IsTokenValid(token string) (bool, error) {
 	return false, fmt.Errorf("token is not valid")
 }
 
+func (t *Token) ParseToken(token string) (map[string]interface{}, error) {
+	jwt := hltool.NewJWToken(t.SignString)
+	return jwt.ParseJWToken(token)
+}
+
 // IsRootToken 是否是root token,root token 不能被用来请求
 func (t *Token) IsRootToken(token string) (bool, error) {
-	jwt := hltool.NewJWToken(t.SignString)
-	parseToken, err := jwt.ParseJWToken(token)
+	parseToken, err := t.ParseToken(token)
+	if err != nil {
+		return false, err
+	}
 	if err != nil {
 		return false, err
 	}

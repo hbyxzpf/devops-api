@@ -144,6 +144,7 @@ func (b *BaseController) Prepare() {
 			b.JsonError("JWToken Auth", TokenAuthError, StringMap{}, true)
 			b.StopRun()
 		}
+		b.Data["tokenUser"], err = jwtoken.ParseToken(token)
 	}
 
 }
