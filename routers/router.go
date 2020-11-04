@@ -47,6 +47,9 @@ func init() {
 		beego.NSNamespace("/version",
 			beego.NSRouter("", &controllers.VersionController{}),
 		),
+		beego.NSNamespace("/proxy",
+			beego.NSRouter("/:module/*",&controllers.ProxyController{},"get,post:Reverse"),
+		),
 	)
 	beego.AddNamespace(apins)
 

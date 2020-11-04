@@ -86,6 +86,7 @@ func InitCli() {
 
 			beego.BConfig.RunMode = *runMode
 		}
+		beego.BConfig.CopyRequestBody = true
 		beego.Run()
 
 	case "token":

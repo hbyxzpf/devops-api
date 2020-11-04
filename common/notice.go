@@ -2,7 +2,6 @@ package common
 
 import (
 	"fmt"
-
 	"github.com/astaxie/beego"
 	"github.com/chanyipiaomiao/hltool"
 )
@@ -35,7 +34,6 @@ func SendByDingTalkRobot(messageType, message, title, robotURL string) (bool, er
 	}
 	return ok, nil
 }
-
 // SendByEmail 通过Email发送消息通知
 func SendByEmail(subject, content, contentType, attach string, to, cc []string) (bool, error) {
 	username := beego.AppConfig.String("email::username")
