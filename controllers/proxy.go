@@ -25,18 +25,9 @@ func (p *ProxyController) Reverse() {
 	proxyFullUrl := fmt.Sprintf(urlFormatter,proxyUrl,p.Ctx.Input.Param(":splat"),p.getAllQuery(p.Ctx.Input.URI(),"?"))
 	request :=httplib.NewBeegoRequest(proxyFullUrl,p.Ctx.Request.Method)
 	if p.Ctx.Input.IsPost() {
-		contentType := "application/x-www-form-urlencoded"
-		if p.Ctx.Input.RequestBody == nil{
-			for k,v := range p.Ctx.Request.Form{
-				request.Param(k,v[0])
-			}
-		}else{
-			contentType = "application/json"
-			request.Body(p.Ctx.Input.RequestBody)
-		}
-		request.Header("Content-Type",contentType)
+		request.Body(p.Ctx.Input.RequestBody)
+		request.Header("Content-Type",p.Ctx.Request.Header.Get("Content-Type"))
 	}
-
 	resp,err := request.Response()
 	if err != nil{
 		p.JsonError(proxyEntryType,"proxy err",StringMap{"result":err.Error()},true)
