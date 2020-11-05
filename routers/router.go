@@ -48,6 +48,7 @@ func init() {
 			beego.NSRouter("", &controllers.VersionController{}),
 		),
 		beego.NSNamespace("/proxy",
+			beego.NSRouter("/self/:module",&controllers.ProxyController{},"get,post:ReverseConfig"),
 			beego.NSRouter("/:module/*",&controllers.ProxyController{},"get,post:Reverse"),
 		),
 	)
