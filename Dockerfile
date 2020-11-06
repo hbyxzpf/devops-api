@@ -12,8 +12,7 @@ WORKDIR /build
 # 将代码复制到容器中
 COPY . .
 RUN  go build -o devops-api .
+FROM scratch
+COPY --from=builder /build /dist
 WORKDIR /dist
-RUN cp /build/devops-api .
-#CMD ./devops-api init
-#ENTRYPOINT ["./devops-api","init"]
 ENTRYPOINT ["./devops-api","server"]
